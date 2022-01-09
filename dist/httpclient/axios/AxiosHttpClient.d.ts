@@ -4,7 +4,7 @@ import { HttpClientPromise } from "../HttpClientPromise";
 export declare class AxiosHttpClient implements HttpClient {
     private axiosInstance;
     private withCredentials;
-    constructor();
+    constructor(axiosInstance?: AxiosInstance);
     setWithCredentials(withCredentials: boolean): void;
     get(url: string): HttpClientPromise;
     delete(url: string): HttpClientPromise;
