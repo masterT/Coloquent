@@ -22,10 +22,6 @@ describe('Query', () => {
         )
     });
 
-    it('should return only jsonapitype when there are no parameters set', () => {
-        assert.equal(query.toString(), model.getJsonApiType());
-    });
-
     it('filter parameters should nest under filter key', () => {
         let filters = [
             new FilterSpec('name', 'Bob'),
@@ -36,7 +32,7 @@ describe('Query', () => {
             query.addFilter(filter);
         }
 
-        assert.equal(query.toString(), model.getJsonApiType()+'?filter%5Bname%5D=Bob&filter%5Bage%5D=99');
+        assert.equal(query.toString(), '?filter%5Bname%5D=Bob&filter%5Bage%5D=99');
     });
 
     it('include parameters should nest under include key', () => {
@@ -44,7 +40,7 @@ describe('Query', () => {
             query.addInclude(include);
         }
 
-        assert.equal(query.toString(), model.getJsonApiType()+'?include=weapons%2Ccostume');
+        assert.equal(query.toString(), '?include=weapons%2Ccostume');
     });
 
     it('option parameters should append to the query string', () => {
@@ -57,7 +53,7 @@ describe('Query', () => {
             query.addOption(option);
         }
 
-        assert.equal(query.toString(), model.getJsonApiType()+'?name=Bob&age=99');
+        assert.equal(query.toString(), '?name=Bob&age=99');
     });
 
     it('pagination parameters do not always have to nest under page key', () => {
@@ -66,7 +62,7 @@ describe('Query', () => {
 
         query.setPaginationSpec(pageSpec);
 
-        assert.equal(query.toString(), model.getJsonApiType()+'?foo=0&bar=10');
+        assert.equal(query.toString(), '?foo=0&bar=10');
     });
 
     it('sort parameters should append to sort key', () => {
@@ -79,7 +75,7 @@ describe('Query', () => {
             query.addSort(sort);
         }
 
-        assert.equal(query.toString(), model.getJsonApiType()+'?sort=name%2C-age');
+        assert.equal(query.toString(), '?sort=name%2C-age');
     });
 
     it('when a JSON-API id is provided, it should parse the relationships to "\<relation\>"', () => {
@@ -92,6 +88,6 @@ describe('Query', () => {
             )
         )
 
-        assert.equal(query.toString(), 'hero/batman/capes');
+        assert.equal(query.toString(), 'batman/capes');
     });
 });

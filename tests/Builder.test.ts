@@ -30,7 +30,7 @@ describe('Builder', () => {
             let request = moxios.requests.mostRecent();
 
             assert.equal(request.config.method, 'get');
-            assert.equal(request.url, 'http://coloquent.app/api/heros?page%5Boffset%5D=0&page%5Blimit%5D=50');
+            assert.equal(request.url, 'http://coloquent.app/api/heros/?page%5Boffset%5D=0&page%5Blimit%5D=50');
 
             done();
         });
@@ -246,7 +246,7 @@ describe('Builder', () => {
             let requestClone = moxios.requests.at(1);
 
             assert.notEqual(request.url, requestClone.url);
-            
+
             assert.notInclude(request.url, 'filter%5Bname%5D=Josh');
             assert.notInclude(requestClone.url, 'filter%5Bname%5D=Bob');
 
@@ -300,12 +300,12 @@ describe('Builder', () => {
 
     it('with method applied before clone should generate same url result', (done) => {
         moxios.requests.reset();
-        
+
         builder
             .with('weapons');
-        
+
         let builderClone = builder;
-        
+
         builder
             .get();
 
@@ -324,9 +324,9 @@ describe('Builder', () => {
 
     it('with method applied after clone should generate different url result', (done) => {
         moxios.requests.reset();
-        
+
         let builderClone = builder;
-        
+
         builder
             .with('weapons')
             .get();
@@ -435,7 +435,7 @@ describe('Builder', () => {
 
     it('orderBy method applied before clone should generate same url result', (done) => {
         moxios.requests.reset();
-        
+
         builder
             .orderBy('name');
 
@@ -501,7 +501,7 @@ describe('Builder', () => {
 
     it('option method applied before clone should generate same url result', (done) => {
         moxios.requests.reset();
-        
+
         builder
             .option('foo', 'bar');
 

@@ -349,7 +349,7 @@ export abstract class Model
     }
 
     private static get effectiveEndpoint(): string {
-        return (this.endpoint ?? this.effectiveJsonApiType).replace(/^\/+/, '');
+        return (this.endpoint ?? this.effectiveJsonApiType).replace(/^\/+/, '').replace(/\/+$/, '')
     }
 
     public static getJsonApiUrl(): string {

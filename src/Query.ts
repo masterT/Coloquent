@@ -101,16 +101,16 @@ export class Query
 
         if (!this.jsonApiId) {
             relationToFind = this.queriedRelationName
-                ? '/' + this.queriedRelationName
+                ? this.queriedRelationName
                 : '';
         } else {
             relationToFind = this.queriedRelationName
-                ? '/' + this.jsonApiId + '/' + this.queriedRelationName
+                ? this.jsonApiId + '/' + this.queriedRelationName
                 : '';
         }
 
         let idToFind: string = this.idToFind
-            ? '/' + this.idToFind
+            ? this.idToFind.toString()
             : '';
 
         let searchParams: QueryParam[] = [];
@@ -129,7 +129,7 @@ export class Query
             paramString += encodeURIComponent(searchParam.name) + '=' + encodeURIComponent(searchParam.value);
         }
 
-        return this.jsonApiType + relationToFind + idToFind + paramString;
+        return [relationToFind + idToFind].join('/') + paramString;
     }
 
     public getJsonApiType()
